@@ -1,4 +1,13 @@
-package com.socgen.loanapprovalplatform.web.rest;
+package com.socgen.loanapprovalplatform.dto;
 
 public class CarLoanApplicationResponse {
+    private Long applicationId;
+
+    public CarLoanApplicationResponse(Long applicationId) {
+        this.applicationId = applicationId;
+    }
+
+    public Long getApplicationId() {
+        return applicationId;
+    }
 }
