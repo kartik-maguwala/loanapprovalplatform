@@ -17,15 +17,15 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/v1/api/fd")
 @Transactional
-public class FrontDeskController {
+public class FrontDeskResource {
 
-    private final Logger log = LoggerFactory.getLogger(FrontDeskController.class);
+    private final Logger log = LoggerFactory.getLogger(FrontDeskResource.class);
 
     private FrontDeskService frontDeskService;
     private LoanFrontDeskRepository loanFrontDeskRepository;
 
-    public FrontDeskController(FrontDeskService frontDeskService,
-                               LoanFrontDeskRepository loanFrontDeskRepository) {
+    public FrontDeskResource(FrontDeskService frontDeskService,
+                             LoanFrontDeskRepository loanFrontDeskRepository) {
         this.frontDeskService = frontDeskService;
         this.loanFrontDeskRepository = loanFrontDeskRepository;
     }

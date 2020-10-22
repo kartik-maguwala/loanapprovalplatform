@@ -1,14 +1,12 @@
 package com.socgen.loanapprovalplatform.dto;
 
-import java.io.Serializable;
-
-public class FrontDeskApproveRequest{
+public class CarLoanComplianceRequest {
     private String notes;
 
-    public FrontDeskApproveRequest() {
+    public CarLoanComplianceRequest() {
     }
 
-    public FrontDeskApproveRequest(String notes) {
+    public CarLoanComplianceRequest(String notes) {
         this.notes = notes;
     }
 

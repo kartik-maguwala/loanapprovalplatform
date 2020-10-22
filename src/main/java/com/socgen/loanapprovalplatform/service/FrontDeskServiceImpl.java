@@ -31,7 +31,7 @@ public class FrontDeskServiceImpl implements FrontDeskService {
 
     @Override
     public void approve(LoanFrontDesk loanFrontDesk, FrontDeskApproveRequest request) {
-        // Update LoanFrontDesk
+
         loanFrontDesk.status(LoanFrontDeskStatus.APPROVED).notes(request.getNotes());
 
         loanFrontDeskRepository.save(loanFrontDesk);
