@@ -2,26 +2,50 @@ package com.socgen.loanapprovalplatform.dto;
 
 import com.socgen.loanapprovalplatform.domain.CarLoanApplication;
 import com.socgen.loanapprovalplatform.domain.enumeration.LoanType;
+import com.sun.istack.NotNull;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 public class CarLoanApplicationRequest {
 
+    @NotBlank
+    @Size(max=50, message="Name should have maximum 50 characters")
     private String firstname;
+
+    @NotBlank
+    @Size(max=50, message="Name should have maximum 50 characters")
     private String lastname;
+
+    @Email(message = "Email should be valid")
     private String email;
-    private String loantype;
+
     private Integer amount;
+
+    @NotBlank
     private String pancardno;
+
+    @NotBlank
     private String accountno;
+
+    @NotBlank
     private String ifsccode;
+
+    @NotBlank
     private String bankname;
+
+    @NotBlank
     private String address1;
     private String address2;
 
-    public CarLoanApplicationRequest(String firstname, String lastname, String email, String loantype, Integer amount, String pancardno, String accountno, String ifsccode, String bankname, String address1, String address2) {
+    public CarLoanApplicationRequest() {
+    }
+
+    public CarLoanApplicationRequest(String firstname, String lastname, String email, Integer amount, String pancardno, String accountno, String ifsccode, String bankname, String address1, String address2) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
-        this.loantype = loantype;
         this.amount = amount;
         this.pancardno = pancardno;
         this.accountno = accountno;
@@ -41,10 +65,6 @@ public class CarLoanApplicationRequest {
 
     public String getEmail() {
         return email;
-    }
-
-    public String getLoantype() {
-        return loantype;
     }
 
     public Integer getAmount() {
@@ -81,7 +101,6 @@ public class CarLoanApplicationRequest {
                 "firstname='" + getFirstname() + "'" +
                 ", lastname='" + getLastname() + "'" +
                 ", email='" + getEmail() + "'" +
-                ", loantype='" + getLoantype() + "'" +
                 ", amount=" + getAmount() +
                 ", pancardno='" + getPancardno() + "'" +
                 ", accountno='" + getAccountno() + "'" +

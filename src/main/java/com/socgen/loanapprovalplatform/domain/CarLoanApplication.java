@@ -4,11 +4,17 @@ import com.socgen.loanapprovalplatform.domain.enumeration.CarLoanStatus;
 import com.socgen.loanapprovalplatform.domain.enumeration.LoanType;
 import com.socgen.loanapprovalplatform.dto.CarLoanApplicationResponse;
 import com.sun.istack.NotNull;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import java.io.Serializable;
 import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "car_loan_application")
@@ -17,8 +23,7 @@ public class CarLoanApplication implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
@@ -69,13 +74,15 @@ public class CarLoanApplication implements Serializable {
     @NotNull
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
-    private CarLoanStatus status;
+    private CarLoanStatus status = CarLoanStatus.PENDING;
 
     @Column(name = "createdon")
-    private Instant createdon;
+    @CreationTimestamp
+    private LocalDateTime createdon;
 
     @Column(name = "modifiedon")
-    private Instant modifiedon;
+    @UpdateTimestamp
+    private LocalDateTime modifiedon;
 
     public Long getId() {
         return id;
@@ -241,29 +248,29 @@ public class CarLoanApplication implements Serializable {
         this.status = status;
     }
 
-    public Instant getCreatedon() {
+    public LocalDateTime getCreatedon() {
         return createdon;
     }
 
-    public CarLoanApplication createdon(Instant createdon) {
+    public CarLoanApplication createdon(LocalDateTime createdon) {
         this.createdon = createdon;
         return this;
     }
 
-    public void setCreatedon(Instant createdon) {
+    public void setCreatedon(LocalDateTime createdon) {
         this.createdon = createdon;
     }
 
-    public Instant getModifiedon() {
+    public LocalDateTime getModifiedon() {
         return modifiedon;
     }
 
-    public CarLoanApplication modifiedon(Instant modifiedon) {
+    public CarLoanApplication modifiedon(LocalDateTime modifiedon) {
         this.modifiedon = modifiedon;
         return this;
     }
 
-    public void setModifiedon(Instant modifiedon) {
+    public void setModifiedon(LocalDateTime modifiedon) {
         this.modifiedon = modifiedon;
     }
 

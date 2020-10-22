@@ -3,7 +3,10 @@ package com.socgen.loanapprovalplatform.web.rest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.socgen.loanapprovalplatform.domain.CarLoanApplication;
 import com.socgen.loanapprovalplatform.dto.CarLoanApplicationRequest;
+import com.socgen.loanapprovalplatform.repository.LoanFrontDeskRepository;
 import com.socgen.loanapprovalplatform.service.CarLoanApplicationService;
+import com.socgen.loanapprovalplatform.service.CarLoanApplicationServiceImpl;
+import com.socgen.loanapprovalplatform.service.FrontDeskService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,20 +24,23 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@ExtendWith(SpringExtension.class)
 @WebMvcTest
-public class CarLoanApplicationControllerTest {
+public class CarLoanApplicationResourceTest {
     @Autowired
     MockMvc mockMvc;
 
     @MockBean
     private CarLoanApplicationService carLoanApplicationService;
+    @MockBean
+    private FrontDeskService frontDeskService;
+    @MockBean
+    private LoanFrontDeskRepository frontDeskRepository;
 
     @Test
-    public void When_ApplyCarLoanWithRightInfo_Expect_Success() throws Exception {
+    public void When_ApplyCarLoanWithProvidedInfo_Expect_Success() throws Exception {
 
         CarLoanApplicationRequest request = new CarLoanApplicationRequest(
-                "firstname", "lastname", "test@exmaple.com", "CAR", 1000,
+                "firstname", "lastname", "test@exmaple.com", 1000,
                 "AAAAAA", "123456789", "DUMMY1234", "DUMMYBANK",
                 "32,ABc,XYZ", "");
 
