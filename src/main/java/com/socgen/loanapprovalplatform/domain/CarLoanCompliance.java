@@ -1,14 +1,12 @@
 package com.socgen.loanapprovalplatform.domain;
 
+import com.socgen.loanapprovalplatform.domain.enumeration.CarLoanComplianceStatus;
 import com.sun.istack.NotNull;
-import org.apache.tomcat.jni.Local;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.Instant;
 import java.time.LocalDateTime;
 
 @Entity

@@ -1,7 +1,12 @@
 package com.socgen.loanapprovalplatform.service;
 
 import com.socgen.loanapprovalplatform.domain.*;
+import com.socgen.loanapprovalplatform.domain.enumeration.CarLoanComplianceStatus;
+import com.socgen.loanapprovalplatform.domain.enumeration.CarLoanStatus;
+import com.socgen.loanapprovalplatform.domain.enumeration.LoanFrontDeskStatus;
+import com.socgen.loanapprovalplatform.domain.enumeration.RiskComplianceStatus;
 import com.socgen.loanapprovalplatform.dto.FrontDeskApproveRequest;
+import com.socgen.loanapprovalplatform.repository.CarLoanApplicationRepository;
 import com.socgen.loanapprovalplatform.repository.CarLoanComplianceRepository;
 import com.socgen.loanapprovalplatform.repository.LoanFrontDeskRepository;
 import com.socgen.loanapprovalplatform.repository.RiskComplianceRepository;
@@ -11,13 +16,15 @@ import org.springframework.stereotype.Service;
 public class FrontDeskServiceImpl implements FrontDeskService {
 
     private LoanFrontDeskRepository loanFrontDeskRepository;
+    private CarLoanApplicationRepository carLoanApplicationRepository;
     private CarLoanComplianceRepository carLoanComplianceRepository;
     private RiskComplianceRepository riskComplianceRepository;
 
     public FrontDeskServiceImpl(LoanFrontDeskRepository loanFrontDeskRepository,
-                                CarLoanComplianceRepository carLoanComplianceRepository,
+                                CarLoanApplicationRepository carLoanApplicationRepository, CarLoanComplianceRepository carLoanComplianceRepository,
                                 RiskComplianceRepository riskComplianceRepository) {
         this.loanFrontDeskRepository = loanFrontDeskRepository;
+        this.carLoanApplicationRepository = carLoanApplicationRepository;
         this.carLoanComplianceRepository = carLoanComplianceRepository;
         this.riskComplianceRepository = riskComplianceRepository;
     }
@@ -38,5 +45,16 @@ public class FrontDeskServiceImpl implements FrontDeskService {
                 new RiskCompliance()
                         .status(RiskComplianceStatus.PENDING)
                         .carLoanApplicationId(loanFrontDesk.getCarLoanApplicationId()));
+    }
+
+    @Override
+    public void reject(LoanFrontDesk loanFrontDesk, FrontDeskApproveRequest request) {
+
+        loanFrontDesk.status(LoanFrontDeskStatus.REJECTED).notes(request.getNotes());
+        loanFrontDeskRepository.save(loanFrontDesk);
+
+        CarLoanApplication carLoanApplication = carLoanApplicationRepository.findById(loanFrontDesk.getCarLoanApplicationId()).get();
+        carLoanApplication.setStatus(CarLoanStatus.REJECTED);
+        carLoanApplicationRepository.save(carLoanApplication);
     }
 }

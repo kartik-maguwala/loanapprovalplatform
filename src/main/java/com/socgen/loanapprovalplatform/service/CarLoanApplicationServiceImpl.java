@@ -2,7 +2,7 @@ package com.socgen.loanapprovalplatform.service;
 
 import com.socgen.loanapprovalplatform.domain.CarLoanApplication;
 import com.socgen.loanapprovalplatform.domain.LoanFrontDesk;
-import com.socgen.loanapprovalplatform.domain.LoanFrontDeskStatus;
+import com.socgen.loanapprovalplatform.domain.enumeration.LoanFrontDeskStatus;
 import com.socgen.loanapprovalplatform.repository.CarLoanApplicationRepository;
 import com.socgen.loanapprovalplatform.repository.LoanFrontDeskRepository;
 import org.springframework.stereotype.Service;

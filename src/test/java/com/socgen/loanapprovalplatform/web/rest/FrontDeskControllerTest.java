@@ -3,10 +3,9 @@ package com.socgen.loanapprovalplatform.web.rest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.socgen.loanapprovalplatform.domain.CarLoanApplication;
 import com.socgen.loanapprovalplatform.domain.LoanFrontDesk;
-import com.socgen.loanapprovalplatform.domain.LoanFrontDeskStatus;
+import com.socgen.loanapprovalplatform.domain.enumeration.LoanFrontDeskStatus;
 import com.socgen.loanapprovalplatform.domain.enumeration.LoanType;
 import com.socgen.loanapprovalplatform.dto.FrontDeskApproveRequest;
-import com.socgen.loanapprovalplatform.repository.CarLoanApplicationRepository;
 import com.socgen.loanapprovalplatform.repository.LoanFrontDeskRepository;
 import com.socgen.loanapprovalplatform.service.CarLoanApplicationService;
 import com.socgen.loanapprovalplatform.service.FrontDeskService;
@@ -18,7 +17,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.Optional;
 

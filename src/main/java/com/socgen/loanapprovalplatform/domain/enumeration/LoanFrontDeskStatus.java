@@ -1,4 +1,4 @@
-package com.socgen.loanapprovalplatform.domain;
+package com.socgen.loanapprovalplatform.domain.enumeration;
 
 public enum LoanFrontDeskStatus {
     PENDING, APPROVED, REJECTED

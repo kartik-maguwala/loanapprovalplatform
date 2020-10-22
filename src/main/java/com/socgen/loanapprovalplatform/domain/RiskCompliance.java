@@ -1,5 +1,6 @@
 package com.socgen.loanapprovalplatform.domain;
 
+import com.socgen.loanapprovalplatform.domain.enumeration.RiskComplianceStatus;
 import com.sun.istack.NotNull;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
