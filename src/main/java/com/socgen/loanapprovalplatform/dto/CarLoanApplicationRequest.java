@@ -5,6 +5,7 @@ import com.socgen.loanapprovalplatform.domain.enumeration.LoanType;
 import com.sun.istack.NotNull;
 
 import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
@@ -21,6 +22,7 @@ public class CarLoanApplicationRequest {
     @Email(message = "Email should be valid")
     private String email;
 
+    @Min(value = 1)
     private Integer amount;
 
     @NotBlank

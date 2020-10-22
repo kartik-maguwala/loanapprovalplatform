@@ -2,7 +2,9 @@ package com.socgen.loanapprovalplatform.web.rest;
 
 import com.socgen.loanapprovalplatform.domain.CarLoanApplication;
 import com.socgen.loanapprovalplatform.domain.LoanFrontDesk;
+import com.socgen.loanapprovalplatform.domain.LoanFrontDeskStatus;
 import com.socgen.loanapprovalplatform.dto.FrontDeskApproveRequest;
+import com.socgen.loanapprovalplatform.exception.ApplicationNotFoundException;
 import com.socgen.loanapprovalplatform.repository.CarLoanApplicationRepository;
 import com.socgen.loanapprovalplatform.repository.LoanFrontDeskRepository;
 import com.socgen.loanapprovalplatform.service.FrontDeskService;
@@ -35,9 +37,9 @@ public class FrontDeskController {
     @ResponseStatus(HttpStatus.OK)
     public void approve(@PathVariable("applicationid") Long applicationid, @RequestBody @Valid FrontDeskApproveRequest request) {
 
-        LoanFrontDesk loanFrontDesk = loanFrontDeskRepository.findByCarLoanApplicationId(applicationid)
+        LoanFrontDesk loanFrontDesk = loanFrontDeskRepository.findByCarLoanApplicationIdAndStatus(applicationid, LoanFrontDeskStatus.PENDING)
                 .orElseThrow(() -> {
-                    return new ResponseStatusException(HttpStatus.NOT_FOUND);
+                    return new ApplicationNotFoundException("id-" + applicationid);
                 });
 
         frontDeskService.approve(loanFrontDesk, request);

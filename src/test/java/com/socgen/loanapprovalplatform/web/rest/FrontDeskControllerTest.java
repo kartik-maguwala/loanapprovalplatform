@@ -3,6 +3,7 @@ package com.socgen.loanapprovalplatform.web.rest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.socgen.loanapprovalplatform.domain.CarLoanApplication;
 import com.socgen.loanapprovalplatform.domain.LoanFrontDesk;
+import com.socgen.loanapprovalplatform.domain.LoanFrontDeskStatus;
 import com.socgen.loanapprovalplatform.domain.enumeration.LoanType;
 import com.socgen.loanapprovalplatform.dto.FrontDeskApproveRequest;
 import com.socgen.loanapprovalplatform.repository.CarLoanApplicationRepository;
@@ -64,7 +65,7 @@ public class FrontDeskControllerTest {
 
         doNothing().when(frontDeskService).approve(any(LoanFrontDesk.class), any(FrontDeskApproveRequest.class));
 
-        when(loanFrontDeskRepository.findByCarLoanApplicationId(123L)).thenReturn(Optional.of(loanFrontDesk));
+        when(loanFrontDeskRepository.findByCarLoanApplicationIdAndStatus(123L, LoanFrontDeskStatus.PENDING)).thenReturn(Optional.of(loanFrontDesk));
 
         mockMvc.perform(MockMvcRequestBuilders.put("/v1/api/fd/123/approve")
                 .content(asJsonString(request))
