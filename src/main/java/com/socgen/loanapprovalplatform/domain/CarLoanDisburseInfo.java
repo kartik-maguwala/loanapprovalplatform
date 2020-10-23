@@ -10,6 +10,7 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.Instant;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @Table(name = "car_loan_disburse_info")
@@ -32,7 +33,7 @@ public class CarLoanDisburseInfo implements Serializable {
     private String branchifsc;
 
     @Column(name = "disbursedon")
-    private LocalDateTime disbursedOn;
+    private Date disbursedOn;
 
     @NotNull
     @Enumerated(EnumType.STRING)
@@ -98,16 +99,16 @@ public class CarLoanDisburseInfo implements Serializable {
         this.branchifsc = branchifsc;
     }
 
-    public LocalDateTime getDisbursedOn() {
+    public Date getDisbursedOn() {
         return disbursedOn;
     }
 
-    public CarLoanDisburseInfo disburmentdate(LocalDateTime disburmentdate) {
+    public CarLoanDisburseInfo disbursedOn(Date disburmentdate) {
         this.disbursedOn = disburmentdate;
         return this;
     }
 
-    public void setDisbursedOn(LocalDateTime disbursedOn) {
+    public void setDisbursedOn(Date disbursedOn) {
         this.disbursedOn = disbursedOn;
     }
 
