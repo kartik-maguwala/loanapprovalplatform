@@ -1,22 +1,25 @@
 package com.socgen.loanapprovalplatform.web.rest;
 
 import com.socgen.loanapprovalplatform.domain.CarLoanCompliance;
-import com.socgen.loanapprovalplatform.domain.LoanFrontDesk;
 import com.socgen.loanapprovalplatform.domain.enumeration.CarLoanComplianceStatus;
-import com.socgen.loanapprovalplatform.domain.enumeration.LoanFrontDeskStatus;
+import com.socgen.loanapprovalplatform.dto.CarLoanApplicationDetailedResponse;
 import com.socgen.loanapprovalplatform.dto.CarLoanComplianceRequest;
-import com.socgen.loanapprovalplatform.dto.FrontDeskApproveRequest;
 import com.socgen.loanapprovalplatform.exception.ApplicationNotFoundException;
 import com.socgen.loanapprovalplatform.repository.CarLoanComplianceRepository;
 import com.socgen.loanapprovalplatform.service.CarLoanComplianceService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/v1/api/clc")
@@ -53,8 +56,24 @@ public class CarLoanComplianceResource {
         carLoanComplianceService.reject(loanFrontDesk, request);
     }
 
+    @RolesAllowed(value = {"ROLE_ADMIN", "ROLE_CARLOANCOMPLIANCE"})
+    @GetMapping("/pending/{pageNo}/{pageSize}")
+    public List<CarLoanApplicationDetailedResponse> getPendingCarLoanApplication(@PathVariable("pageNo") int pageNo,
+                                                                                 @PathVariable("pageSize") int pageSize) {
+
+        Pageable paging = PageRequest.of(pageNo, pageSize);
+
+        Page<CarLoanCompliance> carLoanCompliances = carLoanComplianceRepository.findAllByStatus(CarLoanComplianceStatus.PENDING,
+                paging);
+
+        return carLoanCompliances.stream()
+                .map(carLoanCompliance -> carLoanCompliance.getCarLoanApplication().toDetailedResponseDto())
+                .collect(Collectors.toList());
+
+    }
+
     private CarLoanCompliance getCarLoanCompliance(@PathVariable("applicationid") Long applicationid) {
-        return carLoanComplianceRepository.findByCarLoanApplicationIdAndStatus(applicationid, CarLoanComplianceStatus.PENDING)
+        return carLoanComplianceRepository.findByCarLoanApplication_IdAndStatus(applicationid, CarLoanComplianceStatus.PENDING)
                 .orElseThrow(() -> {
                     return new ApplicationNotFoundException("id-" + applicationid);
                 });

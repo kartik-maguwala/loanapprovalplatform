@@ -2,18 +2,15 @@ package com.socgen.loanapprovalplatform.domain;
 
 import com.socgen.loanapprovalplatform.domain.enumeration.CarLoanStatus;
 import com.socgen.loanapprovalplatform.domain.enumeration.LoanType;
+import com.socgen.loanapprovalplatform.dto.CarLoanApplicationDetailedResponse;
 import com.socgen.loanapprovalplatform.dto.CarLoanApplicationResponse;
 import com.sun.istack.NotNull;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import java.io.Serializable;
-import java.time.Instant;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -313,6 +310,11 @@ public class CarLoanApplication implements Serializable {
 
     public CarLoanApplicationResponse toResponseDto() {
         return new CarLoanApplicationResponse(this.id);
+    }
+
+    public CarLoanApplicationDetailedResponse toDetailedResponseDto() {
+        return new CarLoanApplicationDetailedResponse(this.id, this.firstname, this.lastname, this.email, this.loantype.name(),
+                this.amount, this.pancardno, this.accountno, this.ifsccode, this.bankname, this.address1, this.address2, this.status.name());
     }
 }
 

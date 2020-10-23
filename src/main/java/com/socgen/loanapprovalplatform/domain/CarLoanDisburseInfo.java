@@ -1,7 +1,6 @@
 package com.socgen.loanapprovalplatform.domain;
 
 import com.socgen.loanapprovalplatform.domain.enumeration.CarLoanDisburseStatus;
-import org.apache.tomcat.jni.Local;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -9,7 +8,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.Instant;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -48,9 +46,9 @@ public class CarLoanDisburseInfo implements Serializable {
     @UpdateTimestamp
     private Instant modifiedon;
 
-    @NotNull
-    @Column(name = "carLoanApplicationId", nullable = false)
-    private Long carLoanApplicationId;
+    @OneToOne
+    @JoinColumn(name = "carLoanApplicationId")
+    private CarLoanApplication carLoanApplication;
 
     public Long getId() {
         return id;
@@ -152,16 +150,20 @@ public class CarLoanDisburseInfo implements Serializable {
     }
 
     public Long getCarLoanApplicationId() {
-        return carLoanApplicationId;
+        return this.carLoanApplication.getId();
     }
 
-    public CarLoanDisburseInfo carLoanApplicationId(Long carLoanApplicationId) {
-        this.carLoanApplicationId = carLoanApplicationId;
+    public CarLoanDisburseInfo carLoanApplication(CarLoanApplication carLoanApplication) {
+        this.carLoanApplication = carLoanApplication;
         return this;
     }
 
-    public void setCarLoanApplicationId(Long carLoanApplicationId) {
-        this.carLoanApplicationId = carLoanApplicationId;
+    public CarLoanApplication getCarLoanApplication() {
+        return carLoanApplication;
+    }
+
+    public void setCarLoanApplication(CarLoanApplication carLoanApplication) {
+        this.carLoanApplication = carLoanApplication;
     }
 
     @Override

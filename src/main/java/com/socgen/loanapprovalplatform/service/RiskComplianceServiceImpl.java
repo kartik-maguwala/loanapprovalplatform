@@ -3,7 +3,6 @@ package com.socgen.loanapprovalplatform.service;
 import com.socgen.loanapprovalplatform.domain.CarLoanApplication;
 import com.socgen.loanapprovalplatform.domain.CarLoanDisburseInfo;
 import com.socgen.loanapprovalplatform.domain.RiskCompliance;
-import com.socgen.loanapprovalplatform.domain.enumeration.CarLoanComplianceStatus;
 import com.socgen.loanapprovalplatform.domain.enumeration.CarLoanDisburseStatus;
 import com.socgen.loanapprovalplatform.domain.enumeration.CarLoanStatus;
 import com.socgen.loanapprovalplatform.domain.enumeration.RiskComplianceStatus;
@@ -39,7 +38,7 @@ public class RiskComplianceServiceImpl implements RiskComplianceService {
                 new CarLoanDisburseInfo()
                         .disbursedAmount(carLoanApplication.getAmount())
                         .status(CarLoanDisburseStatus.PENDING)
-                        .carLoanApplicationId(riskCompliance.getCarLoanApplicationId()));
+                        .carLoanApplication(riskCompliance.getCarLoanApplication()));
 
 
         carLoanApplication.setStatus(CarLoanStatus.APPROVED);

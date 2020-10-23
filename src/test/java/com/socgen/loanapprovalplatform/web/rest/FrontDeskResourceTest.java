@@ -9,7 +9,6 @@ import com.socgen.loanapprovalplatform.dto.FrontDeskApproveRequest;
 import com.socgen.loanapprovalplatform.repository.LoanFrontDeskRepository;
 import com.socgen.loanapprovalplatform.service.CarLoanApplicationService;
 import com.socgen.loanapprovalplatform.service.FrontDeskService;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -63,7 +62,7 @@ public class FrontDeskResourceTest {
 
         doNothing().when(frontDeskService).approve(any(LoanFrontDesk.class), any(FrontDeskApproveRequest.class));
 
-        when(loanFrontDeskRepository.findByCarLoanApplicationIdAndStatus(123L, LoanFrontDeskStatus.PENDING)).thenReturn(Optional.of(loanFrontDesk));
+        when(loanFrontDeskRepository.findByCarLoanApplication_IdAndStatus(123L, LoanFrontDeskStatus.PENDING)).thenReturn(Optional.of(loanFrontDesk));
 
         mockMvc.perform(MockMvcRequestBuilders.put("/v1/api/fd/123/approve")
                 .content(asJsonString(request))

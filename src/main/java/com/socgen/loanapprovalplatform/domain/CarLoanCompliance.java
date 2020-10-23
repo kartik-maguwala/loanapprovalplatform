@@ -37,9 +37,9 @@ public class CarLoanCompliance implements Serializable {
     @UpdateTimestamp
     private LocalDateTime modifiedon;
 
-    @NotNull
-    @Column(name = "carLoanApplicationId", nullable = false)
-    private Long carLoanApplicationId;
+    @OneToOne
+    @JoinColumn(name = "carLoanApplicationId")
+    private CarLoanApplication carLoanApplication;
 
     public Long getId() {
         return id;
@@ -102,16 +102,20 @@ public class CarLoanCompliance implements Serializable {
     }
 
     public Long getCarLoanApplicationId() {
-        return carLoanApplicationId;
+        return carLoanApplication.getId();
     }
 
-    public CarLoanCompliance carLoanApplicationId(Long carLoanApplicationId) {
-        this.carLoanApplicationId = carLoanApplicationId;
+    public CarLoanCompliance carLoanApplication(CarLoanApplication carLoanApplication) {
+        this.carLoanApplication = carLoanApplication;
         return this;
     }
 
-    public void setCarLoanApplication(Long carLoanApplicationId) {
-        this.carLoanApplicationId = carLoanApplicationId;
+    public CarLoanApplication getCarLoanApplication() {
+        return carLoanApplication;
+    }
+
+    public void setCarLoanApplication(CarLoanApplication carLoanApplication) {
+        this.carLoanApplication = carLoanApplication;
     }
 
     @Override

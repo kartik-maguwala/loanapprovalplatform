@@ -1,6 +1,9 @@
 package com.socgen.loanapprovalplatform.service;
 
-import com.socgen.loanapprovalplatform.domain.*;
+import com.socgen.loanapprovalplatform.domain.CarLoanApplication;
+import com.socgen.loanapprovalplatform.domain.CarLoanCompliance;
+import com.socgen.loanapprovalplatform.domain.LoanFrontDesk;
+import com.socgen.loanapprovalplatform.domain.RiskCompliance;
 import com.socgen.loanapprovalplatform.domain.enumeration.CarLoanComplianceStatus;
 import com.socgen.loanapprovalplatform.domain.enumeration.CarLoanStatus;
 import com.socgen.loanapprovalplatform.domain.enumeration.LoanFrontDeskStatus;
@@ -39,12 +42,12 @@ public class FrontDeskServiceImpl implements FrontDeskService {
         carLoanComplianceRepository.save(
                 new CarLoanCompliance()
                         .status(CarLoanComplianceStatus.PENDING)
-                        .carLoanApplicationId(loanFrontDesk.getCarLoanApplicationId()));
+                        .carLoanApplication(loanFrontDesk.getCarLoanApplication()));
 
         riskComplianceRepository.save(
                 new RiskCompliance()
                         .status(RiskComplianceStatus.PENDING)
-                        .carLoanApplicationId(loanFrontDesk.getCarLoanApplicationId()));
+                        .carLoanApplication(loanFrontDesk.getCarLoanApplication()));
 
         CarLoanApplication carLoanApplication = carLoanApplicationRepository.findById(loanFrontDesk.getCarLoanApplicationId()).get();
         carLoanApplication.setStatus(CarLoanStatus.INPROCESS);

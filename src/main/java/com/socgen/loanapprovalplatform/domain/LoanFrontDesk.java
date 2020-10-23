@@ -36,9 +36,23 @@ public class LoanFrontDesk implements Serializable {
     @UpdateTimestamp
     private LocalDateTime modifiedon;
 
-    @NotNull
-    @Column(name = "carLoanApplicationId", nullable = false)
-    private Long carLoanApplicationId;
+    @OneToOne
+    @JoinColumn(name = "carLoanApplicationId")
+    private CarLoanApplication carLoanApplication;
+
+
+    public LoanFrontDesk carLoanApplication(CarLoanApplication carLoanApplication) {
+        this.carLoanApplication = carLoanApplication;
+        return this;
+    }
+
+    public CarLoanApplication getCarLoanApplication() {
+        return carLoanApplication;
+    }
+
+    public void setCarLoanApplication(CarLoanApplication carLoanApplication) {
+        this.carLoanApplication = carLoanApplication;
+    }
 
     public Long getId() {
         return id;
@@ -100,19 +114,6 @@ public class LoanFrontDesk implements Serializable {
         this.modifiedon = modifiedon;
     }
 
-    public LoanFrontDesk carLoanApplicationId(Long carLoanApplicationId) {
-        this.carLoanApplicationId = carLoanApplicationId;
-        return this;
-    }
-
-    public Long getCarLoanApplicationId() {
-        return carLoanApplicationId;
-    }
-
-    public void setCarLoanApplicationId(Long carLoanApplicationId) {
-        this.carLoanApplicationId = carLoanApplicationId;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -138,5 +139,9 @@ public class LoanFrontDesk implements Serializable {
                 ", createdon='" + getCreatedon() + "'" +
                 ", modifiedon='" + getModifiedon() + "'" +
                 "}";
+    }
+
+    public Long getCarLoanApplicationId() {
+        return this.carLoanApplication.getId();
     }
 }

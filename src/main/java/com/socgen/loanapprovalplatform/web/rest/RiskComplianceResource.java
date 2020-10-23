@@ -1,21 +1,25 @@
 package com.socgen.loanapprovalplatform.web.rest;
 
-import com.socgen.loanapprovalplatform.domain.CarLoanCompliance;
 import com.socgen.loanapprovalplatform.domain.RiskCompliance;
 import com.socgen.loanapprovalplatform.domain.enumeration.RiskComplianceStatus;
-import com.socgen.loanapprovalplatform.dto.CarLoanComplianceRequest;
+import com.socgen.loanapprovalplatform.dto.CarLoanApplicationDetailedResponse;
 import com.socgen.loanapprovalplatform.dto.RiskComplianceRequest;
 import com.socgen.loanapprovalplatform.exception.ApplicationNotFoundException;
 import com.socgen.loanapprovalplatform.repository.RiskComplianceRepository;
 import com.socgen.loanapprovalplatform.service.RiskComplianceService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/v1/api/rc")
@@ -52,8 +56,24 @@ public class RiskComplianceResource {
         riskComplianceService.reject(riskCompliance, request);
     }
 
+    @RolesAllowed(value = {"ROLE_ADMIN", "ROLE_RISKCOMPLIANCE"})
+    @GetMapping("/pending/{pageNo}/{pageSize}")
+    public List<CarLoanApplicationDetailedResponse> getPendingCarLoanApplication(@PathVariable("pageNo") int pageNo,
+                                                                                 @PathVariable("pageSize") int pageSize) {
+
+        Pageable paging = PageRequest.of(pageNo, pageSize);
+
+        Page<RiskCompliance> riskCompliances = riskComplianceRepository.findAllByStatus(RiskComplianceStatus.PENDING,
+                paging);
+
+        return riskCompliances.stream()
+                .map(riskCompliance -> riskCompliance.getCarLoanApplication().toDetailedResponseDto())
+                .collect(Collectors.toList());
+
+    }
+
     private RiskCompliance getRiskCompliance(@PathVariable("applicationid") Long applicationid) {
-        return riskComplianceRepository.findByCarLoanApplicationIdAndStatus(applicationid, RiskComplianceStatus.PENDING)
+        return riskComplianceRepository.findByCarLoanApplication_IdAndStatus(applicationid, RiskComplianceStatus.PENDING)
                 .orElseThrow(() -> {
                     return new ApplicationNotFoundException("id-" + applicationid);
                 });
