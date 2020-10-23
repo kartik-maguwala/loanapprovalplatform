@@ -10,4 +10,11 @@ public class CarLoanApplicationResponse {
     public Long getApplicationId() {
         return applicationId;
     }
+
+    @Override
+    public String toString() {
+        return "CarLoanApplicationResponse{" +
+                "applicationId=" + applicationId +
+                '}';
+    }
 }

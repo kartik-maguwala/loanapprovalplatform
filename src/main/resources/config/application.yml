@@ -7,7 +7,7 @@
 
 spring:
   profiles:
-    active: default
+    active: dev
 
   datasource:
     driver-class-name: org.h2.Driver

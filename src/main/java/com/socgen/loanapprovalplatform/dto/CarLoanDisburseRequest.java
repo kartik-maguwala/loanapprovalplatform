@@ -60,4 +60,14 @@ public class CarLoanDisburseRequest {
     public void setDisbursementDate(Date disbursementDate) {
         this.disbursementDate = disbursementDate;
     }
+
+    @Override
+    public String toString() {
+        return "CarLoanDisburseRequest{" +
+                "disburseAmount=" + disburseAmount +
+                ", transactionId='" + transactionId + '\'' +
+                ", branchIfsc='" + branchIfsc + '\'' +
+                ", disbursementDate=" + disbursementDate +
+                '}';
+    }
 }

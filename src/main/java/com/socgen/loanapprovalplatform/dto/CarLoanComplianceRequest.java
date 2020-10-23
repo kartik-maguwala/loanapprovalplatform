@@ -17,4 +17,11 @@ public class CarLoanComplianceRequest {
     public void setNotes(String notes) {
         this.notes = notes;
     }
+
+    @Override
+    public String toString() {
+        return "CarLoanComplianceRequest{" +
+                "notes='" + notes + '\'' +
+                '}';
+    }
 }
