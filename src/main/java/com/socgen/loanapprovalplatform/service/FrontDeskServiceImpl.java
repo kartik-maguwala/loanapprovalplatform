@@ -45,6 +45,10 @@ public class FrontDeskServiceImpl implements FrontDeskService {
                 new RiskCompliance()
                         .status(RiskComplianceStatus.PENDING)
                         .carLoanApplicationId(loanFrontDesk.getCarLoanApplicationId()));
+
+        CarLoanApplication carLoanApplication = carLoanApplicationRepository.findById(loanFrontDesk.getCarLoanApplicationId()).get();
+        carLoanApplication.setStatus(CarLoanStatus.INPROCESS);
+        carLoanApplicationRepository.save(carLoanApplication);
     }
 
     @Override
