@@ -1,12 +1,14 @@
+server:
+  port: 8080
 
 logging:
   level:
-#    ROOT: DEBUG
+    #    ROOT: DEBUG
     com.socgen.loanapprovalplatform: DEBUG
 #
 spring:
-#  profiles:
-#    active: dev
+  #  profiles:
+  #    active: dev
 
   datasource:
     driver-class-name: org.h2.Driver
@@ -14,6 +16,13 @@ spring:
     username: sa
     password: sa
 
+keycloak:
+  realm: carloan
+  auth-server-url: http://localhost:9080/auth
+  ssl-required: external
+  resource: internal
+  credentials:
+    secret: 91e20d8f-1678-4d04-8782-f04e1bc19219
+  use-resource-role-mappings: true
+  bearer-only: true
 
-server:
-  port: 8080

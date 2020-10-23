@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 
 @RestController
@@ -30,6 +31,7 @@ public class FrontDeskResource {
         this.loanFrontDeskRepository = loanFrontDeskRepository;
     }
 
+    @RolesAllowed(value = {"ROLE_ADMIN", "ROLE_FRONTDESKOFFICER"})
     @PutMapping("/{applicationid}/approve")
     @ResponseStatus(HttpStatus.OK)
     public void approve(@PathVariable("applicationid") Long applicationid, @RequestBody @Valid FrontDeskApproveRequest request) {
@@ -42,6 +44,7 @@ public class FrontDeskResource {
         frontDeskService.approve(loanFrontDesk, request);
     }
 
+    @RolesAllowed(value = {"ROLE_ADMIN", "ROLE_FRONTDESKOFFICER"})
     @PutMapping("/{applicationid}/reject")
     @ResponseStatus(HttpStatus.OK)
     public void reject(@PathVariable("applicationid") Long applicationid, @RequestBody @Valid FrontDeskApproveRequest request) {

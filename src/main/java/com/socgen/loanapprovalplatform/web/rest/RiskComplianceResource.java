@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 
 @RestController
@@ -31,6 +32,7 @@ public class RiskComplianceResource {
         this.riskComplianceService = riskComplianceService;
     }
 
+    @RolesAllowed(value = {"ROLE_ADMIN", "ROLE_RISKCOMPLIANCE"})
     @PutMapping("/{applicationid}/approve")
     @ResponseStatus(HttpStatus.OK)
     public void approve(@PathVariable("applicationid") Long applicationid, @RequestBody @Valid RiskComplianceRequest request) {
@@ -40,6 +42,7 @@ public class RiskComplianceResource {
         riskComplianceService.approve(riskCompliance, request);
     }
 
+    @RolesAllowed(value = {"ROLE_ADMIN", "ROLE_RISKCOMPLIANCE"})
     @PutMapping("/{applicationid}/reject")
     @ResponseStatus(HttpStatus.OK)
     public void reject(@PathVariable("applicationid") Long applicationid, @RequestBody @Valid RiskComplianceRequest request) {

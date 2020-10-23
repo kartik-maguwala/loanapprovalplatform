@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 
 @RestController
@@ -27,6 +28,7 @@ public class CarLoanDisburseResource {
         this.carLoanDisburseService = carLoanDisburseService;
     }
 
+    @RolesAllowed(value = {"ROLE_ADMIN", "ROLE_DISBURSAL"})
     @PutMapping("/{applicationid}/disburse")
     @ResponseStatus(HttpStatus.OK)
     public void disburse(@PathVariable("applicationid") Long applicationid, @RequestBody @Valid CarLoanDisburseRequest request) {
