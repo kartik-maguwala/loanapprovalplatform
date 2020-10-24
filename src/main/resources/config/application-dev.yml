@@ -15,6 +15,8 @@ spring:
     url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1
     username: sa
     password: sa
+  liquibase:
+    enabled: false
 
 keycloak:
   realm: carloan
