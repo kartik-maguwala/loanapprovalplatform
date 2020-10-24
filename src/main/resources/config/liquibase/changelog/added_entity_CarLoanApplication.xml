@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+
+    <changeSet id="create_car_loan_application_table" author="kartik">
+        <createTable tableName="car_loan_application">
+            <column name="id" autoIncrement="true" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="firstname" type="varchar(50)">
+                <constraints nullable="false" />
+            </column>
+            <column name="lastname" type="varchar(50)">
+                <constraints nullable="false" />
+            </column>
+            <column name="email" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="loantype" type="varchar(20)">
+                <constraints nullable="false" />
+            </column>
+            <column name="amount" type="integer">
+                <constraints nullable="false" />
+            </column>
+            <column name="pancardno" type="varchar(20)">
+                <constraints nullable="false" />
+            </column>
+            <column name="accountno" type="varchar(20)">
+                <constraints nullable="false" />
+            </column>
+            <column name="ifsccode" type="varchar(20)">
+                <constraints nullable="false" />
+            </column>
+            <column name="bankname" type="varchar(50)">
+                <constraints nullable="false" />
+            </column>
+            <column name="address_1" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="address_2" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="status" type="varchar(50)">
+                <constraints nullable="false" />
+            </column>
+            <column name="createdon" type="datetime">
+                <constraints nullable="false" />
+            </column>
+            <column name="modifiedon" type="datetime">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

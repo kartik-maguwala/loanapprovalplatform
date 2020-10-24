@@ -3,6 +3,7 @@ package com.socgen.loanapprovalplatform.dto;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 public class CarLoanDisburseRequest {
@@ -14,6 +15,7 @@ public class CarLoanDisburseRequest {
     private String transactionId;
 
     @NotBlank
+    @Size(max=20, message="Name should have maximum 20 characters")
     private String branchIfsc;
 
     @NotNull

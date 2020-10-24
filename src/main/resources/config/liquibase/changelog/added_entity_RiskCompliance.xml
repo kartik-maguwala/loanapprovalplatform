@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+
+    
+    <changeSet id="create_risk_compliance_table" author="kartik">
+        <createTable tableName="risk_compliance">
+            <column name="id" autoIncrement="true" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="status" type="varchar(50)">
+                <constraints nullable="false" />
+            </column>
+            <column name="notes" type="text">
+                <constraints nullable="true" />
+            </column>
+            <column name="createdon" type="datetime">
+                <constraints nullable="false" />
+            </column>
+            <column name="modifiedon" type="datetime">
+                <constraints nullable="false" />
+            </column>
+            <column name="car_loan_application_id" type="bigint">
+                <constraints unique="true" nullable="true" uniqueConstraintName="ux_risk_compliance_car_loan_application_id" />
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

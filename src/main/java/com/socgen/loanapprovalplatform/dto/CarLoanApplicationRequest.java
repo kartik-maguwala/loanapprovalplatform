@@ -2,7 +2,6 @@ package com.socgen.loanapprovalplatform.dto;
 
 import com.socgen.loanapprovalplatform.domain.CarLoanApplication;
 import com.socgen.loanapprovalplatform.domain.enumeration.LoanType;
-import com.sun.istack.NotNull;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
@@ -26,19 +25,26 @@ public class CarLoanApplicationRequest {
     private Integer amount;
 
     @NotBlank
+    @Size(max=20, message="PanCard should have maximum 20 characters")
     private String pancardno;
 
     @NotBlank
+    @Size(max=20, message="Account Number should have maximum 20 characters")
     private String accountno;
 
     @NotBlank
+    @Size(max=20, message="Name should have maximum 20 characters")
     private String ifsccode;
 
     @NotBlank
+    @Size(max=50, message="Name should have maximum 50 characters")
     private String bankname;
 
     @NotBlank
+    @Size(max=255, message="Name should have maximum 255 characters")
     private String address1;
+
+    @Size(max=255, message="Name should have maximum 255 characters")
     private String address2;
 
     public CarLoanApplicationRequest() {

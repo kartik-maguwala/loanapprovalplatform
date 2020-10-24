@@ -30,7 +30,7 @@ public class CarLoanDisburseInfo implements Serializable {
     @Column(name = "branchifsc")
     private String branchifsc;
 
-    @Column(name = "disbursedon")
+    @Column(name = "disburmentdate")
     private Date disbursedOn;
 
     @NotNull

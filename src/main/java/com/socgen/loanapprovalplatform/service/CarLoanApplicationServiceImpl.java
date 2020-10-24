@@ -22,7 +22,6 @@ public class CarLoanApplicationServiceImpl implements CarLoanApplicationService 
     @Override
     public CarLoanApplication applyLoan(CarLoanApplication carLoanApplication) {
         CarLoanApplication returnedCarLoanApplication = carLoanApplicationRepository.save(carLoanApplication);
-//        loanFrontDeskRepository.save(new LoanFrontDesk().carLoanApplicationId(returnedCarLoanApplication.getId()).status(LoanFrontDeskStatus.PENDING));
         loanFrontDeskRepository.save(new LoanFrontDesk().carLoanApplication(returnedCarLoanApplication).status(LoanFrontDeskStatus.PENDING));
         return returnedCarLoanApplication;
     }

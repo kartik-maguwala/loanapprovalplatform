@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+
+
+    <!--
+        Added the entity CarLoanDisburseInfo.
+    -->
+    <changeSet id="create_car_loan_disburse_info_table" author="kartik">
+        <createTable tableName="car_loan_disburse_info">
+            <column name="id" autoIncrement="true" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="disbursed_amount" type="integer">
+                <constraints nullable="false"/>
+            </column>
+            <column name="transactionid" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="branchifsc" type="varchar(20)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="disburmentdate" type="datetime">
+                <constraints nullable="true"/>
+            </column>
+            <column name="status" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="createdon" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modifiedon" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="car_loan_application_id" type="bigint">
+                <constraints unique="true" nullable="true"
+                             uniqueConstraintName="ux_car_loan_disburse_info_car_loan_application_id"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>
+
+
