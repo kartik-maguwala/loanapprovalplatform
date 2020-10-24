@@ -4,12 +4,12 @@ import com.socgen.loanapprovalplatform.domain.enumeration.CarLoanStatus;
 import com.socgen.loanapprovalplatform.domain.enumeration.LoanType;
 import com.socgen.loanapprovalplatform.dto.CarLoanApplicationDetailedResponse;
 import com.socgen.loanapprovalplatform.dto.CarLoanApplicationResponse;
-import com.sun.istack.NotNull;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 

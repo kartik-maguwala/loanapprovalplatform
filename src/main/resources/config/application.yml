@@ -31,3 +31,13 @@ management:
     web:
       exposure:
         include: "*"
+
+keycloak:
+  realm: carloan
+  auth-server-url: http://localhost:9080/auth
+  ssl-required: external
+  resource: internal
+  credentials:
+    secret: 91e20d8f-1678-4d04-8782-f04e1bc19219
+  use-resource-role-mappings: true
+  bearer-only: true

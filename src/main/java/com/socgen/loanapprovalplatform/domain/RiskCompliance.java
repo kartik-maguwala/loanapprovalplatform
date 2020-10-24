@@ -1,11 +1,11 @@
 package com.socgen.loanapprovalplatform.domain;
 
 import com.socgen.loanapprovalplatform.domain.enumeration.RiskComplianceStatus;
-import com.sun.istack.NotNull;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 

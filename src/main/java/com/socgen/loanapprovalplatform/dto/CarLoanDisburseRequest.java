@@ -22,6 +22,7 @@ public class CarLoanDisburseRequest {
     private Date disbursementDate;
 
     public CarLoanDisburseRequest() {
+        disbursementDate = new Date();
     }
 
     public CarLoanDisburseRequest(int disburseAmount, String transactionId, String branchIfsc, Date disbursementDate) {

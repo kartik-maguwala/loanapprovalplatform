@@ -7,6 +7,7 @@ import com.socgen.loanapprovalplatform.domain.enumeration.CarLoanDisburseStatus;
 import com.socgen.loanapprovalplatform.domain.enumeration.CarLoanStatus;
 import com.socgen.loanapprovalplatform.domain.enumeration.RiskComplianceStatus;
 import com.socgen.loanapprovalplatform.dto.RiskComplianceRequest;
+import com.socgen.loanapprovalplatform.exception.ApplicationNotFoundException;
 import com.socgen.loanapprovalplatform.repository.CarLoanApplicationRepository;
 import com.socgen.loanapprovalplatform.repository.CarLoanDisburseInfoRepository;
 import com.socgen.loanapprovalplatform.repository.RiskComplianceRepository;
@@ -32,7 +33,7 @@ public class RiskComplianceServiceImpl implements RiskComplianceService {
         riskCompliance.status(RiskComplianceStatus.APPROVED).notes(request.getNotes());
         riskComplianceRepository.save(riskCompliance);
 
-        CarLoanApplication carLoanApplication = carLoanApplicationRepository.findById(riskCompliance.getCarLoanApplicationId()).get();
+        CarLoanApplication carLoanApplication = getCarLoanApplicationFrom(riskCompliance);
 
         carLoanDisburseInfoRepository.save(
                 new CarLoanDisburseInfo()
@@ -50,8 +51,16 @@ public class RiskComplianceServiceImpl implements RiskComplianceService {
         riskCompliance.status(RiskComplianceStatus.REJECTED).notes(request.getNotes());
         riskComplianceRepository.save(riskCompliance);
 
-        CarLoanApplication carLoanApplication = carLoanApplicationRepository.findById(riskCompliance.getCarLoanApplicationId()).get();
+        CarLoanApplication carLoanApplication = getCarLoanApplicationFrom(riskCompliance);
+
         carLoanApplication.setStatus(CarLoanStatus.REJECTED);
         carLoanApplicationRepository.save(carLoanApplication);
+    }
+
+    private CarLoanApplication getCarLoanApplicationFrom(RiskCompliance riskCompliance) {
+        return carLoanApplicationRepository.findById(riskCompliance.getCarLoanApplicationId())
+                .orElseThrow(() ->
+                        new ApplicationNotFoundException("id-" + riskCompliance.getCarLoanApplicationId())
+                );
     }
 }

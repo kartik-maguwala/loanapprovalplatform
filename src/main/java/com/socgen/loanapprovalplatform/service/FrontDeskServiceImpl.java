@@ -9,6 +9,7 @@ import com.socgen.loanapprovalplatform.domain.enumeration.CarLoanStatus;
 import com.socgen.loanapprovalplatform.domain.enumeration.LoanFrontDeskStatus;
 import com.socgen.loanapprovalplatform.domain.enumeration.RiskComplianceStatus;
 import com.socgen.loanapprovalplatform.dto.FrontDeskApproveRequest;
+import com.socgen.loanapprovalplatform.exception.ApplicationNotFoundException;
 import com.socgen.loanapprovalplatform.repository.CarLoanApplicationRepository;
 import com.socgen.loanapprovalplatform.repository.CarLoanComplianceRepository;
 import com.socgen.loanapprovalplatform.repository.LoanFrontDeskRepository;
@@ -49,7 +50,8 @@ public class FrontDeskServiceImpl implements FrontDeskService {
                         .status(RiskComplianceStatus.PENDING)
                         .carLoanApplication(loanFrontDesk.getCarLoanApplication()));
 
-        CarLoanApplication carLoanApplication = carLoanApplicationRepository.findById(loanFrontDesk.getCarLoanApplicationId()).get();
+        CarLoanApplication carLoanApplication = getCarLoanApplicationFrom(loanFrontDesk);
+
         carLoanApplication.setStatus(CarLoanStatus.INPROCESS);
         carLoanApplicationRepository.save(carLoanApplication);
     }
@@ -60,8 +62,15 @@ public class FrontDeskServiceImpl implements FrontDeskService {
         loanFrontDesk.status(LoanFrontDeskStatus.REJECTED).notes(request.getNotes());
         loanFrontDeskRepository.save(loanFrontDesk);
 
-        CarLoanApplication carLoanApplication = carLoanApplicationRepository.findById(loanFrontDesk.getCarLoanApplicationId()).get();
+        CarLoanApplication carLoanApplication = getCarLoanApplicationFrom(loanFrontDesk);
         carLoanApplication.setStatus(CarLoanStatus.REJECTED);
         carLoanApplicationRepository.save(carLoanApplication);
+    }
+
+    private CarLoanApplication getCarLoanApplicationFrom(LoanFrontDesk loanFrontDesk) {
+        return carLoanApplicationRepository.findById(loanFrontDesk.getCarLoanApplicationId())
+                .orElseThrow(() ->
+                        new ApplicationNotFoundException("id-" + loanFrontDesk.getCarLoanApplicationId())
+                );
     }
 }

@@ -5,6 +5,7 @@ import com.socgen.loanapprovalplatform.domain.CarLoanDisburseInfo;
 import com.socgen.loanapprovalplatform.domain.enumeration.CarLoanDisburseStatus;
 import com.socgen.loanapprovalplatform.domain.enumeration.CarLoanStatus;
 import com.socgen.loanapprovalplatform.dto.CarLoanDisburseRequest;
+import com.socgen.loanapprovalplatform.exception.ApplicationNotFoundException;
 import com.socgen.loanapprovalplatform.repository.CarLoanApplicationRepository;
 import com.socgen.loanapprovalplatform.repository.CarLoanDisburseInfoRepository;
 import org.springframework.stereotype.Service;
@@ -30,7 +31,10 @@ public class CarLoanDisburseServiceImpl implements CarLoanDisburseService {
                 .transactionid(request.getTransactionId());
         carLoanDisburseInfoRepository.save(carLoanDisburseInfo);
 
-        CarLoanApplication carLoanApplication = carLoanApplicationRepository.findById(carLoanDisburseInfo.getCarLoanApplicationId()).get();
+        CarLoanApplication carLoanApplication = carLoanApplicationRepository.findById(carLoanDisburseInfo.getCarLoanApplicationId())
+                .orElseThrow(() ->
+                        new ApplicationNotFoundException("id-" + carLoanDisburseInfo.getCarLoanApplicationId())
+                );
         carLoanApplication.setStatus(CarLoanStatus.DISBURSED);
         carLoanApplicationRepository.save(carLoanApplication);
     }
