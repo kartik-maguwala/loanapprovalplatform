@@ -14,15 +14,15 @@ node {
         sh "./mvnw -ntp clean"
     }
 
-//    stage('backend tests') {
-//        try {
-//            sh "./mvnw -ntp verify"
-//        } catch(err) {
-//            throw err
-//        } finally {
-//            junit '**/target/test-results/**/TEST-*.xml'
-//        }
-//    }
+    stage('backend tests') {
+        try {
+            sh "./mvnw -ntp verify"
+        } catch(err) {
+            throw err
+        } finally {
+            junit '**/target/test-results/**/TEST-*.xml'
+        }
+    }
 
     stage('packaging') {
         sh "./mvnw -ntp package -DskipTests"

@@ -10,11 +10,12 @@ import javax.validation.constraints.Size;
 
 public class CarLoanApplicationRequest {
 
-    @NotBlank
+    @NotBlank(message = "Please enter firstname")
     @Size(max=50, message="Name should have maximum 50 characters")
     private String firstname;
 
-    @NotBlank
+
+    @NotBlank(message = "Please enter lastname")
     @Size(max=50, message="Name should have maximum 50 characters")
     private String lastname;
 
@@ -24,23 +25,23 @@ public class CarLoanApplicationRequest {
     @Min(value = 1)
     private Integer amount;
 
-    @NotBlank
+    @NotBlank(message = "Please enter pancard")
     @Size(max=20, message="PanCard should have maximum 20 characters")
     private String pancardno;
 
-    @NotBlank
+    @NotBlank(message = "Please enter account number")
     @Size(max=20, message="Account Number should have maximum 20 characters")
     private String accountno;
 
-    @NotBlank
+    @NotBlank(message = "Please enter IFSC code")
     @Size(max=20, message="Name should have maximum 20 characters")
     private String ifsccode;
 
-    @NotBlank
+    @NotBlank(message = "Please enter bank name")
     @Size(max=50, message="Name should have maximum 50 characters")
     private String bankname;
 
-    @NotBlank
+    @NotBlank(message = "Please enter address1")
     @Size(max=255, message="Name should have maximum 255 characters")
     private String address1;
 

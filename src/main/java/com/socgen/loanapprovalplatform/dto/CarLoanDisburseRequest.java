@@ -11,14 +11,14 @@ public class CarLoanDisburseRequest {
     @Min(value = 1)
     private int disburseAmount;
 
-    @NotBlank
+    @NotBlank(message = "Please enter transaction id")
     private String transactionId;
 
-    @NotBlank
+    @NotBlank(message = "Please enter branch ifsc code")
     @Size(max=20, message="Name should have maximum 20 characters")
     private String branchIfsc;
 
-    @NotNull
+    @NotNull(message = "Please enter disbursal date")
     private Date disbursementDate;
 
     public CarLoanDisburseRequest() {

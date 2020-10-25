@@ -27,12 +27,10 @@ public class RiskCompliance implements Serializable {
     @Column(name = "notes")
     private String notes;
 
-    @NotNull
     @Column(name = "createdon", nullable = false)
     @CreationTimestamp
     private LocalDateTime createdon;
 
-    @NotNull
     @Column(name = "modifiedon", nullable = false)
     @UpdateTimestamp
     private LocalDateTime modifiedon;

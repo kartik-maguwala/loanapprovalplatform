@@ -6,8 +6,6 @@ import com.socgen.loanapprovalplatform.dto.CarLoanApplicationRequest;
 import com.socgen.loanapprovalplatform.repository.LoanFrontDeskRepository;
 import com.socgen.loanapprovalplatform.service.CarLoanApplicationService;
 import com.socgen.loanapprovalplatform.service.FrontDeskService;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -32,8 +30,8 @@ public class CarLoanApplicationResourceTest {
     @MockBean
     private LoanFrontDeskRepository frontDeskRepository;
 
-    @Test
-    @Disabled
+//    @Test
+//    @Disabled
     public void When_ApplyCarLoanWithProvidedInfo_Expect_Success() throws Exception {
 
         CarLoanApplicationRequest request = new CarLoanApplicationRequest(
