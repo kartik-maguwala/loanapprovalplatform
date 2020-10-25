@@ -36,7 +36,7 @@
 
 ![Datbase Design](https://raw.githubusercontent.com/kartik-maguwala/loanapprovalplatform/master/images/DB_Diagram.png)
 
-## Run Keycloak Service
+## OAuth 2.0 / OpenID Connect
 
 There are multiple users(with role) using the application. They are
 * Loan Applicant: Who apply for a loan and can be anonymous.
