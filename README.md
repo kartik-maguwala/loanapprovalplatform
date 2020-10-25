@@ -30,11 +30,11 @@
 
 ## Proposed Architecture
 
-![High Level Design](https://github.com/kartik-maguwala/loanapprovalplatform/tree/master/images/HighlevelDesign.png)
+![High Level Design](https://github.com/kartik-maguwala/loanapprovalplatform/tree/master/images/HighlevelDesign.png?raw=true)
 
 ## Database Design
 
-![Datbase Design](https://github.com/kartik-maguwala/loanapprovalplatform/tree/master/images/DB_Diagram.png)
+![Datbase Design](https://github.com/kartik-maguwala/loanapprovalplatform/tree/master/images/DB_Diagram.png?raw=true)
 
 ## Run Keycloak Service
 
