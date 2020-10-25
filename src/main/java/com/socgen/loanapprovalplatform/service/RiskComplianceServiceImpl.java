@@ -11,10 +11,14 @@ import com.socgen.loanapprovalplatform.exception.ApplicationNotFoundException;
 import com.socgen.loanapprovalplatform.repository.CarLoanApplicationRepository;
 import com.socgen.loanapprovalplatform.repository.CarLoanDisburseInfoRepository;
 import com.socgen.loanapprovalplatform.repository.RiskComplianceRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 @Service
 public class RiskComplianceServiceImpl implements RiskComplianceService {
+
+    private final Logger log = LoggerFactory.getLogger(RiskComplianceServiceImpl.class);
 
     private RiskComplianceRepository riskComplianceRepository;
     private CarLoanDisburseInfoRepository carLoanDisburseInfoRepository;
@@ -35,6 +39,8 @@ public class RiskComplianceServiceImpl implements RiskComplianceService {
 
         CarLoanApplication carLoanApplication = getCarLoanApplicationFrom(riskCompliance);
 
+        log.debug("Car loan approving by risk compliance department -> " + carLoanApplication);
+
         carLoanDisburseInfoRepository.save(
                 new CarLoanDisburseInfo()
                         .disbursedAmount(carLoanApplication.getAmount())
@@ -52,6 +58,7 @@ public class RiskComplianceServiceImpl implements RiskComplianceService {
         riskComplianceRepository.save(riskCompliance);
 
         CarLoanApplication carLoanApplication = getCarLoanApplicationFrom(riskCompliance);
+        log.debug("Car loan rejecting by risk compliance department -> " + carLoanApplication);
 
         carLoanApplication.setStatus(CarLoanStatus.REJECTED);
         carLoanApplicationRepository.save(carLoanApplication);

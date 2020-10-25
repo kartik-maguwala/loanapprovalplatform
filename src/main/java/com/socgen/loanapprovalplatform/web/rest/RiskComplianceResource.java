@@ -41,6 +41,8 @@ public class RiskComplianceResource {
     @ResponseStatus(HttpStatus.OK)
     public void approve(@PathVariable("applicationid") Long applicationid, @RequestBody @Valid RiskComplianceRequest request) {
 
+        log.debug("Risk compliance REST request to approve CarLoanApplication : {}", request);
+
         RiskCompliance riskCompliance = getRiskCompliance(applicationid);
 
         riskComplianceService.approve(riskCompliance, request);
@@ -51,6 +53,8 @@ public class RiskComplianceResource {
     @ResponseStatus(HttpStatus.OK)
     public void reject(@PathVariable("applicationid") Long applicationid, @RequestBody @Valid RiskComplianceRequest request) {
 
+        log.debug("Risk compliance REST request to reject CarLoanApplication : {}", request);
+
         RiskCompliance riskCompliance = getRiskCompliance(applicationid);
 
         riskComplianceService.reject(riskCompliance, request);
@@ -60,6 +64,8 @@ public class RiskComplianceResource {
     @GetMapping("/pending/{pageNo}/{pageSize}")
     public List<CarLoanApplicationDetailedResponse> getPendingCarLoanApplication(@PathVariable("pageNo") int pageNo,
                                                                                  @PathVariable("pageSize") int pageSize) {
+
+        log.debug("Risk compliance REST request to get pending car loan application with pageno-{} and pagesize-{}", pageNo, pageSize);
 
         Pageable paging = PageRequest.of(pageNo, pageSize);
 

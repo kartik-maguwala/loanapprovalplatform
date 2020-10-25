@@ -46,6 +46,8 @@ public class FrontDeskResource {
     @ResponseStatus(HttpStatus.OK)
     public void approve(@PathVariable("applicationid") Long applicationid, @RequestBody @Valid FrontDeskApproveRequest request) {
 
+        log.debug("Front desk REST request to approve CarLoanApplication : {}", request);
+
         LoanFrontDesk loanFrontDesk = loanFrontDeskRepository.findByCarLoanApplication_IdAndStatus(applicationid, LoanFrontDeskStatus.PENDING)
                 .orElseThrow(() -> {
                     return new ApplicationNotFoundException("id-" + applicationid);
@@ -59,6 +61,8 @@ public class FrontDeskResource {
     @ResponseStatus(HttpStatus.OK)
     public void reject(@PathVariable("applicationid") Long applicationid, @RequestBody @Valid FrontDeskApproveRequest request) {
 
+        log.debug("Front desk REST request to reject CarLoanApplication : {}", request);
+
         LoanFrontDesk loanFrontDesk = loanFrontDeskRepository.findByCarLoanApplication_IdAndStatus(applicationid, LoanFrontDeskStatus.PENDING)
                 .orElseThrow(() -> {
                     return new ApplicationNotFoundException("id-" + applicationid);
@@ -71,6 +75,8 @@ public class FrontDeskResource {
     @GetMapping("/pending/{pageNo}/{pageSize}")
     public List<CarLoanApplicationDetailedResponse> getPendingCarLoanApplication(@PathVariable("pageNo") int pageNo,
                                                                                  @PathVariable("pageSize") int pageSize) {
+
+        log.debug("Front desk REST request to get pending car loan application with pageno-{} and pagesize-{}", pageNo, pageSize);
 
         Pageable paging = PageRequest.of(pageNo, pageSize);
 

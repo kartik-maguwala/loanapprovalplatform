@@ -29,3 +29,6 @@ keycloak:
   bearer-only: true
 
 
+springdoc:
+  api-docs:
+    enabled: false

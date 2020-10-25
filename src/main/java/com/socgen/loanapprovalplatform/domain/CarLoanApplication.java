@@ -284,7 +284,7 @@ public class CarLoanApplication implements Serializable {
 
     @Override
     public int hashCode() {
-        return 31;
+        return super.hashCode();
     }
 
     @Override

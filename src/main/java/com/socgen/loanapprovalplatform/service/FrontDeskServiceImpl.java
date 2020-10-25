@@ -14,10 +14,15 @@ import com.socgen.loanapprovalplatform.repository.CarLoanApplicationRepository;
 import com.socgen.loanapprovalplatform.repository.CarLoanComplianceRepository;
 import com.socgen.loanapprovalplatform.repository.LoanFrontDeskRepository;
 import com.socgen.loanapprovalplatform.repository.RiskComplianceRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 @Service
 public class FrontDeskServiceImpl implements FrontDeskService {
+
+    private final Logger log = LoggerFactory.getLogger(FrontDeskServiceImpl.class);
+
 
     private LoanFrontDeskRepository loanFrontDeskRepository;
     private CarLoanApplicationRepository carLoanApplicationRepository;
@@ -52,6 +57,7 @@ public class FrontDeskServiceImpl implements FrontDeskService {
 
         CarLoanApplication carLoanApplication = getCarLoanApplicationFrom(loanFrontDesk);
 
+        log.debug("Car loan approving by front desk department -> " + carLoanApplication);
         carLoanApplication.setStatus(CarLoanStatus.INPROCESS);
         carLoanApplicationRepository.save(carLoanApplication);
     }
@@ -63,6 +69,8 @@ public class FrontDeskServiceImpl implements FrontDeskService {
         loanFrontDeskRepository.save(loanFrontDesk);
 
         CarLoanApplication carLoanApplication = getCarLoanApplicationFrom(loanFrontDesk);
+
+        log.debug("Car loan rejecting by front desk department -> " + carLoanApplication);
         carLoanApplication.setStatus(CarLoanStatus.REJECTED);
         carLoanApplicationRepository.save(carLoanApplication);
     }

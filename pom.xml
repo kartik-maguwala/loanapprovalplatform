@@ -19,6 +19,8 @@
         <springfox-swagger.version>2.9.2</springfox-swagger.version>
         <keycloak.version>10.0.0</keycloak.version>
         <jib-maven-plugin.version>2.4.0</jib-maven-plugin.version>
+        <liquibase-maven-plugin.version>3.5.5</liquibase-maven-plugin.version>
+        <sonar-maven-plugin.version>3.4.0.905</sonar-maven-plugin.version>
     </properties>
 
     <dependencies>
@@ -49,7 +51,7 @@
         <dependency>
             <groupId>org.liquibase</groupId>
             <artifactId>liquibase-maven-plugin</artifactId>
-            <version>3.5.5</version>
+            <version>${liquibase-maven-plugin.version}</version>
         </dependency>
         <dependency>
             <groupId>io.micrometer</groupId>
@@ -162,7 +164,7 @@
                 <plugin>
                     <groupId>org.sonarsource.scanner.maven</groupId>
                     <artifactId>sonar-maven-plugin</artifactId>
-                    <version>3.4.0.905</version>
+                    <version>${sonar-maven-plugin.version}</version>
                 </plugin>
             </plugins>
         </pluginManagement>

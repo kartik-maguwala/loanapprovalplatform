@@ -8,10 +8,15 @@ import com.socgen.loanapprovalplatform.dto.CarLoanDisburseRequest;
 import com.socgen.loanapprovalplatform.exception.ApplicationNotFoundException;
 import com.socgen.loanapprovalplatform.repository.CarLoanApplicationRepository;
 import com.socgen.loanapprovalplatform.repository.CarLoanDisburseInfoRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 @Service
 public class CarLoanDisburseServiceImpl implements CarLoanDisburseService {
+
+    private final Logger log = LoggerFactory.getLogger(CarLoanDisburseServiceImpl.class);
+
 
     private CarLoanDisburseInfoRepository carLoanDisburseInfoRepository;
     private CarLoanApplicationRepository carLoanApplicationRepository;
@@ -24,6 +29,8 @@ public class CarLoanDisburseServiceImpl implements CarLoanDisburseService {
 
     @Override
     public void disburse(CarLoanDisburseInfo carLoanDisburseInfo, CarLoanDisburseRequest request) {
+
+
         carLoanDisburseInfo.branchifsc(request.getBranchIfsc())
                 .disbursedAmount(request.getDisburseAmount())
                 .disbursedOn(request.getDisbursementDate())
@@ -35,6 +42,9 @@ public class CarLoanDisburseServiceImpl implements CarLoanDisburseService {
                 .orElseThrow(() ->
                         new ApplicationNotFoundException("id-" + carLoanDisburseInfo.getCarLoanApplicationId())
                 );
+
+        log.debug("Car Loan disbursing -> " + carLoanApplication);
+
         carLoanApplication.setStatus(CarLoanStatus.DISBURSED);
         carLoanApplicationRepository.save(carLoanApplication);
     }

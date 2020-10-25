@@ -41,6 +41,7 @@ public class CarLoanComplianceResource {
     @ResponseStatus(HttpStatus.OK)
     public void approve(@PathVariable("applicationid") Long applicationid, @RequestBody @Valid CarLoanComplianceRequest request) {
 
+        log.debug("Car compliance REST request to approve CarLoanApplication : {}", request);
         CarLoanCompliance carLoanCompliance = getCarLoanCompliance(applicationid);
 
         carLoanComplianceService.approve(carLoanCompliance, request);
@@ -51,6 +52,8 @@ public class CarLoanComplianceResource {
     @ResponseStatus(HttpStatus.OK)
     public void reject(@PathVariable("applicationid") Long applicationid, @RequestBody @Valid CarLoanComplianceRequest request) {
 
+        log.debug("Car compliance REST request to reject CarLoanApplication : {}", request);
+
         CarLoanCompliance loanFrontDesk = getCarLoanCompliance(applicationid);
 
         carLoanComplianceService.reject(loanFrontDesk, request);
@@ -60,6 +63,8 @@ public class CarLoanComplianceResource {
     @GetMapping("/pending/{pageNo}/{pageSize}")
     public List<CarLoanApplicationDetailedResponse> getPendingCarLoanApplication(@PathVariable("pageNo") int pageNo,
                                                                                  @PathVariable("pageSize") int pageSize) {
+
+        log.debug("Car compliance REST request to get pending car loan application with pageno-{} and pagesize-{}", pageNo, pageSize);
 
         Pageable paging = PageRequest.of(pageNo, pageSize);
 
